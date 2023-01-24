@@ -1,9 +1,8 @@
 {
   description = "OpenJDK 20 EA binaries";
-  inputs = { nixpkgs.url = "github:NixOS/nixpkgs"; };
+  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11"; };
   outputs = { self, nixpkgs }: {
-    defaultPackage.x86_64-linux =
-      with import nixpkgs { system = "x86_64-linux"; };
+    defaultPackage.x86_64-linux = with nixpkgs.legacyPackages.x86_64-linux;
       stdenv.mkDerivation rec {
         name = "jdk-20+${version}";
         version = "32";
@@ -19,8 +18,8 @@
         '';
         meta = with lib; { platforms = platforms.linux; };
       };
-    defaultPackage.x86_64-darwin =
-      with import nixpkgs { system = "x86_64-darwin"; };
+
+    defaultPackage.x86_64-darwin = with nixpkgs.legacyPackages.x86_64-darwin;
       stdenv.mkDerivation rec {
         name = "jdk-20+${version}";
         version = "32";
@@ -36,8 +35,8 @@
         '';
         meta = with lib; { platforms = platforms.darwin; };
       };
-    defaultPackage.aarch64-linux =
-      with import nixpkgs { system = "aarch64-linux"; };
+
+    defaultPackage.aarch64-linux = with nixpkgs.legacyPackages.aarch64-linux;
       stdenv.mkDerivation rec {
         name = "jdk-20+${version}";
         version = "32";
@@ -53,8 +52,7 @@
         '';
         meta = with lib; { platforms = platforms.linux; };
       };
-    defaultPackage.aarch64-darwin =
-      with import nixpkgs { system = "aarch64-darwin"; };
+    defaultPackage.aarch64-darwin = with nixpkgs.legacyPackages.aarch64-darwin;
       stdenv.mkDerivation rec {
         name = "jdk-20+${version}";
         version = "32";
